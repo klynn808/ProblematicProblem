@@ -91,6 +91,52 @@ namespace ProblematicProblem
                 }
                 Console.WriteLine();
 
+                Console.WriteLine("Would you like to add your own activity? yes/no");
+                input = Console.ReadLine().Trim().ToLower();
+
+                if (input == "yes")
+                {
+                    bool addingActivities = true;
+
+                    while (addingActivities)
+                    {
+                        Console.WriteLine("Please enter the activity you would like to add: ");
+                        string newActivity = Console.ReadLine().Trim();
+
+                        if (!string.IsNullOrEmpty(newActivity) && !activities.Contains(newActivity))
+                        {
+                            activities.Add(newActivity);
+                            Console.WriteLine($"Great! {newActivity} has been added to your list!");
+                        }
+                        else if (activities.Contains(newActivity))
+                        {
+                            Console.WriteLine("This activity already exists in your list.");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid input. Activity cannot be empty.");
+                        }
+
+                        Console.WriteLine("Would you like to add another activity? yes/no: ");
+                        string continueAdding = Console.ReadLine().Trim().ToLower();
+                        addingActivities = (continueAdding == "yes");
+
+                        if (continueAdding != "yes" && continueAdding != "no")
+                        {
+                            Console.WriteLine("Invalid input, please enter 'yes' or 'no'.");
+                            addingActivities = false;
+                        }
+                    }
+                }
+                else if (input == "no")
+                {
+                    Console.WriteLine("Okay! Moving on.");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid input, please enter a 'yes' or 'no'.");
+                }
+
                 Console.Write("Would you like to add any activities from the list before we generate one? yes/no: ");
                 input = Console.ReadLine().Trim().ToLower();
                 bool addToList = (input == "yes");
@@ -181,7 +227,7 @@ namespace ProblematicProblem
 
                 string userChoice = Console.ReadLine().Trim().ToLower();
 
-                if (userChoice == "keep") 
+                if (userChoice == "keep")
                 {
                     Console.WriteLine($"Great! Enjoy your {randomActivity}, {userName}!");
                     cont = false;
@@ -195,6 +241,7 @@ namespace ProblematicProblem
                     Console.WriteLine("Invalid input. Please enter 'Keep' or 'Redo.");
                 }
             }
+            
         }
 
     }
